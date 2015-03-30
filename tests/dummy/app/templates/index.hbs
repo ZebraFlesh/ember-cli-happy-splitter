@@ -1,0 +1,9 @@
+{{#split-container isVertical=true}}
+  {{#split-view class="bgBlue"}}
+    <h2 class="zeroMargin">hello from left</h2>
+  {{/split-view}}{{!-- This comment is the least invasive way to prevent spaces between the view and the bar.
+  --}}{{splitter-bar}}{{!-- This comment is the least invasive way to prevent spaces between the bar and the view.
+  --}}{{#split-view class="bgRed"}}
+      <h2 class="zeroMargin">hello from right</h2>
+  {{/split-view}}
+{{/split-container}}

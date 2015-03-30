@@ -1,0 +1,33 @@
+.split-container {
+  width: 100%;
+  height: 100%;
+}
+
+.splitter {
+  background-color: black;
+  opacity: 0.1;
+}
+
+.splitter:hover {
+  background-color: black;
+  opacity: 1.0;
+}
+
+.split-view.vertical, .splitter.vertical {
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.split-view.horizontal, .splitter.horizontal {
+  width: 100%;
+  display: block;
+}
+
+.splitter.vertical {
+  cursor: ew-resize;
+}
+
+.splitter.horizontal {
+  cursor: ns-resize;
+}
