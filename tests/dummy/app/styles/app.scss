@@ -4,6 +4,8 @@
 
 html, body {
   height: 100%;
+  // IE seems to have a problem with full height inline elements forcing a scroll bar. This fixes its brain damage.
+  -ms-overflow-y: hidden;
 }
 
 .fullHeight {
@@ -20,6 +22,10 @@ html, body {
 
 .bgRed {
   background-color: lightpink;
+}
+
+.verticalScroll {
+  overflow-y: auto;
 }
 
 .bigPadding {
