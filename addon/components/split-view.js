@@ -3,29 +3,32 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   splitPercentage: 50,
 
-  classNameBindings: ['parentView.isVertical:vertical:horizontal'],
+  isVertical: Ember.computed.readOnly('parentView.isVertical'),
+  splitterWidth: Ember.computed.readOnly('parentView.splitterWidth'),
+
+  classNameBindings: ['isVertical:vertical:horizontal'],
   classNames: ['split-view'],
 
   setupSplitView: function () {
     this.updateDimensions();
   }.on('didInsertElement'),
 
+  teardownSplitView: function () {
+  }.on('willDestroyElement'),
+
   updateDimensions: function () {
     var percentage = this.get('splitPercentage'),
-      parent = this.get('parentView'),
       // split the width of the splitter between the left/right or top/bottom views
-      splitterWidth = parent.get('splitterWidth') / 2,
+      splitterWidth = this.get('splitterWidth') / 2,
       style = this.element.style,
       dimension = `calc( ${percentage}% - ${splitterWidth}px)`;
 
-    if (parent.get('isVertical'))
+    if (this.get('isVertical')) {
       style.width = dimension;
-    else
+    }
+    else {
       style.height = dimension;
+    }
 
-  }.observes('splitPercentage', 'parentView.splitterWidth', 'parentView.isVertical'),
-
-  teardownSplitView: function () {
-
-  }.on('willDestroyElement')
+  }.observes('splitPercentage', 'splitterWidth', 'isVertical')
 });

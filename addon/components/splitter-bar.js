@@ -4,19 +4,22 @@ export default Ember.Component.extend({
   classNameBindings: ['parentView.isVertical:vertical:horizontal'],
   classNames: ['splitter'],
 
+  isVertical: Ember.computed.readOnly('parentView.isVertical'),
+  splitterWidth: Ember.computed.readOnly('parentView.splitterWidth'),
   setupSplitterBar: function () {
     this.updateDimensions();
   }.on('didInsertElement'),
 
   updateDimensions: function () {
     var style = this.element.style,
-      parent = this.get('parentView'),
-      splitterWidth = parent.get('splitterWidth'),
+      splitterWidth = this.get('splitterWidth'),
       dimension = `${splitterWidth}px`;
 
-    if (parent.get('isVertical'))
+    if (this.get('isVertical')) {
       style.width = dimension;
-    else
+    }
+    else {
       style.height = dimension;
-  }.observes('parentView.splitterWidth', 'parentView.isVertical')
+    }
+  }.observes('splitterWidth', 'isVertical')
 });
