@@ -7,11 +7,11 @@ export default Ember.Component.extend({
   isVertical: Ember.computed.readOnly('parentView.isVertical'),
   splitterWidth: Ember.computed.readOnly('parentView.splitterWidth'),
 
-  setupSplitterBar: function () {
+  setupSplitterBar: Ember.on('didInsertElement', function () {
     this.updateDimensions();
-  }.on('didInsertElement'),
+  }),
 
-  updateDimensions: function () {
+  updateDimensions: Ember.observer('splitterWidth', 'isVertical', function () {
     var style = this.element.style,
       splitterWidth = this.get('splitterWidth'),
       dimension = `${splitterWidth}px`;
@@ -22,7 +22,7 @@ export default Ember.Component.extend({
     else {
       style.height = dimension;
     }
-  }.observes('splitterWidth', 'isVertical'),
+  }),
 
   mouseDown: function (event) {
     if (event.button === 0 && !event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey) {

@@ -11,13 +11,13 @@ export default Ember.Component.extend({
   classNames: ['split-container'],
   classNameBindings: ['_dragging:disable-select'],
 
-  teardownSplitContainer: function () {
+  teardownSplitContainer: Ember.on('willDestroyElement', function () {
     if (this.get('_dragging')) {
       this._removeEventHandlers();
     }
 
     this.get('split-container').destroy();
-  }.on('willDestroyElement'),
+  }),
 
   mouseUp: function () {
     if (this.get('_dragging')) {
