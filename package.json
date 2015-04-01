@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-happy-splitter",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.1.0",
+  "description": "Ember componet for split panel that works without CSP violations",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,11 +11,18 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zebraflesh/ember-cli-happy-splitter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zebraflesh/ember-cli-happy-splitter/issues"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "ZebraFlesh",
+  "homepage": "https://github.com/zebraflesh/ember-cli-happy-splitter",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
@@ -34,7 +41,13 @@
     "ember-export-application-global": "^1.0.2"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "ember",
+    "splitter",
+    "split view",
+    "split container",
+    "split panel",
+    "happy"
   ],
   "dependencies": {
     "ember-cli-babel": "^4.0.0",

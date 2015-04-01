@@ -1,6 +1,6 @@
 # ember-cli-happy-splitter
 
-Basic addon that implements a split panel (AKA split view, split container).  It tries to have very little opinion 
+Ember component that implements a split panel (AKA split view, split container).  It tries to have very little opinion 
  about the container and the nested views.
  
 Why is it happy?  Because there are no content security provider violations! &#9786;
