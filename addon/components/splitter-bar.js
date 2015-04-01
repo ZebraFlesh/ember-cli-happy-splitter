@@ -1,11 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNameBindings: ['parentView.isVertical:vertical:horizontal'],
+  classNameBindings: ['isVertical:vertical:horizontal'],
   classNames: ['splitter'],
 
   isVertical: Ember.computed.readOnly('parentView.isVertical'),
   splitterWidth: Ember.computed.readOnly('parentView.splitterWidth'),
+
   setupSplitterBar: function () {
     this.updateDimensions();
   }.on('didInsertElement'),
@@ -21,5 +22,11 @@ export default Ember.Component.extend({
     else {
       style.height = dimension;
     }
-  }.observes('splitterWidth', 'isVertical')
+  }.observes('splitterWidth', 'isVertical'),
+
+  mouseDown: function (event) {
+    if (event.button === 0 && !event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey) {
+      this.get('parentView').send('dragSplitter');
+    }
+  }
 });

@@ -3,6 +3,13 @@
   height: 100%;
 }
 
+.split-container.disable-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .splitter {
   background-color: black;
   opacity: 0.1;
