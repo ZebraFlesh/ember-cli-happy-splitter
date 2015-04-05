@@ -11,12 +11,14 @@ export default Ember.Component.extend({
   classNames: ['split-container'],
   classNameBindings: ['_dragging:disable-select'],
 
+  setupSplitContainer: Ember.on('didInsertElement', function () {
+
+  }),
+
   teardownSplitContainer: Ember.on('willDestroyElement', function () {
     if (this.get('_dragging')) {
       this._removeEventHandlers();
     }
-
-    this.get('split-container').destroy();
   }),
 
   mouseUp: function () {
@@ -68,16 +70,24 @@ export default Ember.Component.extend({
     },
 
     addView: function (view) {
+      Ember.debug('attempting to add view');
       if (view === undefined || view === null) {
         return;
       }
 
+      Ember.debug('view not null');
+
       if (this._leading === undefined) {
+        Ember.debug('attempting to assign to leading');
         this._leading = view;
+        Ember.debug('assingment made');
       }
       else if (this._trailing === undefined) {
+        Ember.debug('attempting to assign to trailing');
         this._trailing = view;
+        Ember.debug('assingment made');
       }
+      Ember.debug('all done');
     },
 
     removeView: function (view) {
