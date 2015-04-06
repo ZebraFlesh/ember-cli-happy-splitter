@@ -43,11 +43,11 @@
   "keywords": [
     "ember-addon",
     "ember",
+    "happy",
     "splitter",
     "split view",
     "split container",
-    "split panel",
-    "happy"
+    "split panel"
   ],
   "dependencies": {
     "ember-cli-babel": "^4.0.0",
