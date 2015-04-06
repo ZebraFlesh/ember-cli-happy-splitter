@@ -20,49 +20,50 @@ Or with Ember CLI:
 ### Vertical Splitter
 
 ````htmlbars
-{{#split-container isVertical=true}}
-  {{#split-view}}
+{{#happy-split-container isVertical=true}}
+  {{#happy-split-view}}
     <h2>hello from left panel!</h2>
-  {{/split-view}}
-  {{~ splitter-bar ~}}
-  {{#split-view}}
+  {{/happy-split-view}}
+  {{~ happy-splitter-bar ~}}
+  {{#happy-split-view}}
     <h2>hello from right panel!</h2>
-  {{/split-view}}
-{{/split-container}}
+  {{/happy-split-view}}
+{{/happy-split-container}}
 ````
 
-Note the use of the handlebars whitespace control character ('~') on both sides of the splitter-bar. The split-container 
-uses a simple inline-block layout. When using a vertical splitter, browsers will interpret the line breaks as meaningful 
-syntax. The whitespace control character removes these line breaks. This is only required for vertical splitters.
+Note the use of the handlebars whitespace control character ('~') on both sides of the happy-splitter-bar. The 
+happy-split-container uses a simple inline-block layout. When using a vertical splitter, browsers will interpret the 
+line breaks as meaningful syntax. The whitespace control character removes these line breaks. This is only required 
+for vertical splitters.
 
 The isVertical variable defaults to true and is optional in this scenario.
 
 ### Horizontal Splitter
 
 ````htmlbars
-{{#split-container isVertical=false}}
-  {{#split-view}}
+{{#happy-split-container isVertical=false}}
+  {{#happy-split-view}}
     <h2>hello from top panel!</h2>
-  {{/split-view}}
-  {{splitter-bar}}
-  {{#split-view}}
+  {{/happy-split-view}}
+  {{happy-splitter-bar}}
+  {{#happy-split-view}}
     <h2>hello from bottom panel!</h2>
-  {{/split-view}}
-{{/split-container}}
+  {{/happy-split-view}}
+{{/happy-split-container}}
 ````
 
 ### Customizing Splitter Width
 
 ````htmlbars
-{{#split-container isVertical=true splitterWidth=10}}
-  {{#split-view}}
+{{#happy-split-container isVertical=true splitterWidth=10}}
+  {{#happy-split-view}}
     <h2>hello from left panel!</h2>
-  {{/split-view}}
-  {{~ splitter-bar ~}}
-  {{#split-view}}
+  {{/happy-split-view}}
+  {{~ happy-splitter-bar ~}}
+  {{#happy-split-view}}
     <h2>hello from right panel!</h2>
-  {{/split-view}}
-{{/split-container}}
+  {{/happy-split-view}}
+{{/happy-split-container}}
 ````
 
 This will create a splitter 10px wide.
@@ -70,15 +71,15 @@ This will create a splitter 10px wide.
 ### Customizing Split Amounts
 
 ````htmlbars
-{{#split-container isVertical=true}}
-  {{#split-view splitPercentage=25}}
+{{#happy-split-container isVertical=true}}
+  {{#happy-split-view splitPercentage=25}}
     <h2>hello from left panel!</h2>
-  {{/split-view}}
-  {{~ splitter-bar ~}}
-  {{#split-view}}
+  {{/happy-split-view}}
+  {{~ happy-splitter-bar ~}}
+  {{#happy-split-view}}
     <h2>hello from right panel!</h2>
-  {{/split-view}}
-{{/split-container}}
+  {{/happy-split-view}}
+{{/happy-split-container}}
 ````
 
 Annotate each panel with the desired split percentage. Percentages need to add up to 100.

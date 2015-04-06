@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNameBindings: ['isVertical:vertical:horizontal'],
-  classNames: ['splitter'],
+  classNames: ['happy-splitter'],
 
   isVertical: Ember.computed.readOnly('parentView.isVertical'),
   splitterWidth: Ember.computed.readOnly('parentView.splitterWidth'),

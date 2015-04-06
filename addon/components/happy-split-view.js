@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   splitPercentage: 50,
 
   classNameBindings: ['isVertical:vertical:horizontal'],
-  classNames: ['split-view'],
+  classNames: ['happy-split-view'],
 
   setupSplitView: Ember.on('didInsertElement', function () {
     this.updateDimensions();

@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   _leading: undefined,
   _trailing: undefined,
 
-  classNames: ['split-container'],
+  classNames: ['happy-split-container'],
   classNameBindings: ['_dragging:disable-select'],
 
   setupSplitContainer: Ember.on('didInsertElement', function () {
@@ -59,7 +59,7 @@ export default Ember.Component.extend({
     dragSplitter: function () {
       var $element;
 
-      if (this._leading === undefined || this._leading === null || this._trailing === undefined || this.trailing === null) {
+      if (this._leading === undefined || this._leading === null || this._trailing === undefined || this._trailing === null) {
         return;
       }
 
