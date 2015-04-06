@@ -23,18 +23,17 @@ Or with Ember CLI:
 {{#split-container isVertical=true}}
   {{#split-view}}
     <h2>hello from left panel!</h2>
-  {{/split-view}}{{!-- This comment is the least invasive way to prevent spaces between the view and the bar.
-  --}}{{splitter-bar}}{{!-- This comment is the least invasive way to prevent spaces between the bar and the view.
-  --}}{{#split-view}}
+  {{/split-view}}
+  {{~ splitter-bar ~}}
+  {{#split-view}}
     <h2>hello from right panel!</h2>
   {{/split-view}}
 {{/split-container}}
 ````
 
-Note the comments between the elements. The split-container uses a simple inline-block layout. When using a vertical
-splitter, browsers will interpret the line breaks as meaningful syntax. Using comments is the least invasive way to 
-prevent extra space between the elements. Refer to [this article](https://css-tricks.com/fighting-the-space-between-inline-block-elements/)
- for more information.
+Note the use of the handlebars whitespace control character ('~') on both sides of the splitter-bar. The split-container 
+uses a simple inline-block layout. When using a vertical splitter, browsers will interpret the line breaks as meaningful 
+syntax. The whitespace control character removes these line breaks. This is only required for vertical splitters.
 
 The isVertical variable defaults to true and is optional in this scenario.
 
@@ -58,9 +57,9 @@ The isVertical variable defaults to true and is optional in this scenario.
 {{#split-container isVertical=true splitterWidth=10}}
   {{#split-view}}
     <h2>hello from left panel!</h2>
-  {{/split-view}}{{!-- This comment is the least invasive way to prevent spaces between the view and the bar.
-  --}}{{splitter-bar}}{{!-- This comment is the least invasive way to prevent spaces between the bar and the view.
-  --}}{{#split-view}}
+  {{/split-view}}
+  {{~ splitter-bar ~}}
+  {{#split-view}}
     <h2>hello from right panel!</h2>
   {{/split-view}}
 {{/split-container}}
@@ -74,9 +73,9 @@ This will create a splitter 10px wide.
 {{#split-container isVertical=true}}
   {{#split-view splitPercentage=25}}
     <h2>hello from left panel!</h2>
-  {{/split-view}}{{!-- This comment is the least invasive way to prevent spaces between the view and the bar.
-  --}}{{splitter-bar}}{{!-- This comment is the least invasive way to prevent spaces between the bar and the view.
-  --}}{{#split-view splitPercentage=75}}
+  {{/split-view}}
+  {{~ splitter-bar ~}}
+  {{#split-view}}
     <h2>hello from right panel!</h2>
   {{/split-view}}
 {{/split-container}}

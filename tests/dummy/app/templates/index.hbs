@@ -1,9 +1,9 @@
 {{#split-container isVertical=true}}
   {{#split-view class="bgBlue verticalScroll"}}
     {{lorem-ipsum length=5500}}
-  {{/split-view}}{{!-- This comment is the least invasive way to prevent spaces between the view and the bar.
-  --}}{{splitter-bar}}{{!-- This comment is the least invasive way to prevent spaces between the bar and the view.
-  --}}{{#split-view class="bgRed verticalScroll"}}
+  {{/split-view}}
+  {{~ splitter-bar ~}}
+  {{#split-view class="bgRed verticalScroll"}}
     {{lorem-ipsum length=5500}}
   {{/split-view}}
 {{/split-container}}
