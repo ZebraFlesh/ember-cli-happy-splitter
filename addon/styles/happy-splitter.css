@@ -32,9 +32,9 @@
 }
 
 .happy-splitter.vertical {
-  cursor: ew-resize;
+  cursor: col-resize;
 }
 
 .happy-splitter.horizontal {
-  cursor: ns-resize;
+  cursor: row-resize;
 }
