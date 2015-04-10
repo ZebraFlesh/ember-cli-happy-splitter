@@ -11,9 +11,46 @@ Via Ember CLI:
 
 `ember install ember-cli-happy-splitter`
 
-## Examples
+## Available Options
 
-### Vertical Splitter
+* `isVertical` - boolean flag to create vertical (true) or horizontal (false) split views; set on the `happy-split-container`
+* `splitterWidth` - the width of the splitter in pixels; set on the `happy-split-container`
+* `splitPercentage` - the percentage of each `happy-split-view`; you are responsible for ensuring they total 100
+
+### CSS rules
+
+Override the following CSS rules to customize the appearance of this component:
+
+* `.happy-split-container` - the container that holders the views and splitter bars; 100% width and height by default
+* `.happy-split-view` - the views within the split container; no default rule provided
+* `.happy-splitter` - the splitter bar when the user is not interacting with it
+* `.happy-splitter:hover` - the splitter bar when the user is hovering over it; no default rule provided
+* `.happy-splitter.dragging` - the splitter bar when the user is dragging it
+* `.happy-splitter.vertical` - vertical splitter bar; change the cursor definition here
+* `.happy-splitter.horizontal` - horizontal splitter bar; change the cursor definition here
+
+## Usage 
+
+This is a simple vertical splitter configuration. Note the use of the handlebars whitespace control character ('~') on 
+both sides of the happy-splitter-bar. The happy-split-container uses a simple inline-block layout. When using a 
+vertical splitter, browsers will interpret the line breaks as meaningful syntax. The whitespace control character 
+removes these line breaks. This is only required for vertical splitters.
+
+````htmlbars
+{{#happy-split-container}}
+  {{#happy-split-view}}
+    <h2>hello from left panel!</h2>
+  {{/happy-split-view}}
+  {{~ happy-splitter-bar ~}}
+  {{#happy-split-view}}
+    <h2>hello from right panel!</h2>
+  {{/happy-split-view}}
+{{/happy-split-container}}
+````
+
+### Examples
+
+#### Vertical Splitter
 
 ````htmlbars
 {{#happy-split-container isVertical=true}}
@@ -27,14 +64,9 @@ Via Ember CLI:
 {{/happy-split-container}}
 ````
 
-Note the use of the handlebars whitespace control character ('~') on both sides of the happy-splitter-bar. The 
-happy-split-container uses a simple inline-block layout. When using a vertical splitter, browsers will interpret the 
-line breaks as meaningful syntax. The whitespace control character removes these line breaks. This is only required 
-for vertical splitters.
-
 The isVertical variable defaults to true and is optional in this scenario.
 
-### Horizontal Splitter
+#### Horizontal Splitter
 
 ````htmlbars
 {{#happy-split-container isVertical=false}}
@@ -48,7 +80,7 @@ The isVertical variable defaults to true and is optional in this scenario.
 {{/happy-split-container}}
 ````
 
-### Customizing Splitter Width
+#### Customizing Splitter Width
 
 ````htmlbars
 {{#happy-split-container isVertical=true splitterWidth=10}}
@@ -64,7 +96,7 @@ The isVertical variable defaults to true and is optional in this scenario.
 
 This will create a splitter 10px wide.
 
-### Customizing Split Amounts
+#### Customizing Split Amounts
 
 ````htmlbars
 {{#happy-split-container isVertical=true}}

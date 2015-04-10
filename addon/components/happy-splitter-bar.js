@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNameBindings: ['isVertical:vertical:horizontal'],
+  classNameBindings: ['isVertical:vertical:horizontal', 'isDragging:dragging'],
   classNames: ['happy-splitter'],
 
+  isDragging: Ember.computed.readOnly('parentView.isResizing'),
   isVertical: Ember.computed.readOnly('parentView.isVertical'),
   splitterWidth: Ember.computed.readOnly('parentView.splitterWidth'),
 

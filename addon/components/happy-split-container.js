@@ -1,30 +1,32 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  isResizing: false,
   isVertical: true,
   splitterWidth: 6,
 
-  _dragging: false,
+  _dragStarted: false,
   _leading: undefined,
   _trailing: undefined,
 
   classNames: ['happy-split-container'],
-  classNameBindings: ['_dragging:disable-select'],
+  classNameBindings: ['_dragStarted:disable-select'],
 
   setupSplitContainer: Ember.on('didInsertElement', function () {
 
   }),
 
   teardownSplitContainer: Ember.on('willDestroyElement', function () {
-    if (this.get('_dragging')) {
+    if (this.get('_dragStarted')) {
       this._removeEventHandlers();
     }
   }),
 
   mouseUp: function () {
-    if (this.get('_dragging')) {
+    if (this.get('_dragStarted')) {
       this._removeEventHandlers();
-      this.set('_dragging', false);
+      this.set('isResizing', false);
+      this.set('_dragStarted', false);
     }
   },
 
@@ -39,6 +41,8 @@ export default Ember.Component.extend({
       leading = instance._leading,
       trailing = instance._trailing,
       percentage;
+
+    instance.set('isResizing', true);
 
     if (instance.isVertical) {
       percentage = (event.pageX - leading.$().offset().left) / instance.$().width() * 100;
@@ -64,7 +68,7 @@ export default Ember.Component.extend({
       }
 
       $element = this.$();
-      this.set('_dragging', true);
+      this.set('_dragStarted', true);
       $element.on('selectstart', this._$blockSelectionInIE);
       $element.on('mousemove', this, this._$onMouseMove);
     },
