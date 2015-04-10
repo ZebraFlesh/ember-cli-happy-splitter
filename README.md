@@ -7,13 +7,9 @@ Why is it happy?  Because there are no content security policy violations! &#978
 
 ## Installation
 
-With npm:
+Via Ember CLI:
 
-`npm install --save ember-cli-happy-splitter`
-
-Or with Ember CLI:
-
-`ember install:npm ember-cli-happy-splitter`
+`ember install ember-cli-happy-splitter`
 
 ## Examples
 
