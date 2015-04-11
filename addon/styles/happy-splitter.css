@@ -31,10 +31,10 @@
   display: block;
 }
 
-.happy-splitter.vertical {
+.happy-splitter.vertical, .happy-split-container.vertical.dragging {
   cursor: col-resize;
 }
 
-.happy-splitter.horizontal {
+.happy-splitter.horizontal, .happy-split-container.horizontal.dragging {
   cursor: row-resize;
 }

@@ -26,8 +26,8 @@ Override the following CSS rules to customize the appearance of this component:
 * `.happy-splitter` - the splitter bar when the user is not interacting with it
 * `.happy-splitter:hover` - the splitter bar when the user is hovering over it; no default rule provided
 * `.happy-splitter.dragging` - the splitter bar when the user is dragging it
-* `.happy-splitter.vertical` - vertical splitter bar; change the cursor definition here
-* `.happy-splitter.horizontal` - horizontal splitter bar; change the cursor definition here
+* `.happy-splitter.vertical, .happy-split-container.vertical.dragging` - change the cursor definition here for vertically split containers
+* `.happy-splitter.horizontal, .happy-split-container.horizontal.dragging` - change the cursor definition here for horizontally split containers
 
 ## Usage 
 

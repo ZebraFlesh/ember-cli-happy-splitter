@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   _trailing: undefined,
 
   classNames: ['happy-split-container'],
-  classNameBindings: ['_dragStarted:disable-select'],
+  classNameBindings: ['isVertical:vertical:horizontal', 'isResizing:dragging', '_dragStarted:disable-select'],
 
   setupSplitContainer: Ember.on('didInsertElement', function () {
 
