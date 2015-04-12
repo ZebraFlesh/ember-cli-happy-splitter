@@ -1,0 +1,27 @@
+/* allow the thumb to be centered within the splitter bar */
+.happy-splitter {
+  position: relative;
+}
+
+.happy-splitter-thumb {
+  /* center the thumb within the splitter bar */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* Make it look "pretty", for some values of "pretty" */
+  background-color: #8E388E;
+  opacity: 0.75;
+  border-radius: 1.5px;
+}
+
+.vertical > .happy-splitter-thumb {
+  width: 3px;
+  height: 10%;
+}
+
+.horizontal > .happy-splitter-thumb {
+  height: 3px;
+  width: 10%;
+}

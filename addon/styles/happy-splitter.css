@@ -11,13 +11,13 @@
 }
 
 .happy-splitter {
-  background-color: black;
-  opacity: 0.1;
+  /* If you plan on using the happy-splitter-thumb, this value must be specified as either rgba or without opacity. */
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .happy-splitter.dragging {
-  background-color: black;
-  opacity: 1.0;
+  /* If you plan on using the happy-splitter-thumb, this value must be specified as either rgba or without opacity. */
+  background-color: rgba(0, 0, 0, 1.0);
 }
 
 .happy-split-view.vertical, .happy-splitter.vertical {

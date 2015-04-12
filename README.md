@@ -29,6 +29,8 @@ Override the following CSS rules to customize the appearance of this component:
 * `.happy-splitter.dragging` - the splitter bar when the user is dragging it
 * `.happy-splitter.vertical, .happy-split-container.vertical.dragging` - change the cursor definition here for vertically split containers
 * `.happy-splitter.horizontal, .happy-split-container.horizontal.dragging` - change the cursor definition here for horizontally split containers
+* `.happy-splitter-thumb` - the thumb within the splitter bar; no styling by default, refer to 
+[splitter-thumb.scss](https://github.com/ZebraFlesh/ember-cli-happy-splitter/tree/master/tests/dummy/app/styles/splitter-thumb.scss) for an example 
 
 ## Usage 
 
