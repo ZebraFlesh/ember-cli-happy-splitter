@@ -16,6 +16,7 @@ Via Ember CLI:
 * `isVertical` - boolean flag to create vertical (true) or horizontal (false) split views; set on the `happy-split-container`
 * `splitterWidth` - the width of the splitter in pixels; set on the `happy-split-container`
 * `splitPercentage` - the percentage of each `happy-split-view`; you are responsible for ensuring they total 100
+* `minimumPercentage` - the minimum `splitPercentage` of each `happy-split-view`; defaults to 10%
 
 ### CSS rules
 
@@ -120,6 +121,7 @@ Annotate each panel with the desired split percentage. Percentages need to add u
 * Handle more than 2 panels in a container
 * Add widget handles to splitter
 * Validate split percentages add up to 100
+* Validate minimumPercentage >= 0
 
 ## License
 

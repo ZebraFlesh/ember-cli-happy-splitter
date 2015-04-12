@@ -6,15 +6,12 @@ export default Ember.Component.extend({
   splitterWidth: 6,
 
   _dragStarted: false,
+  _splitLine: undefined,
   _leading: undefined,
   _trailing: undefined,
 
   classNames: ['happy-split-container'],
   classNameBindings: ['isVertical:vertical:horizontal', 'isResizing:dragging', '_dragStarted:disable-select'],
-
-  setupSplitContainer: Ember.on('didInsertElement', function () {
-
-  }),
 
   teardownSplitContainer: Ember.on('willDestroyElement', function () {
     if (this.get('_dragStarted')) {
@@ -38,21 +35,31 @@ export default Ember.Component.extend({
 
   _$onMouseMove: function (event) {
     var instance = event.data,
-      leading = instance._leading,
-      trailing = instance._trailing,
+      vertical = instance.get('isVertical'),
+      splitLine = instance.get('_splitLine'),
+      leading = instance.get('_leading'),
+      trailing = instance.get('_trailing'),
       percentage;
 
     instance.set('isResizing', true);
 
-    if (instance.isVertical) {
+    // Compute the new percentage of the leading view.
+    if (vertical) {
       percentage = (event.pageX - leading.$().offset().left) / instance.$().width() * 100;
     }
     else {
       percentage = (event.pageY - leading.$().offset().top) / instance.$().height() * 100;
     }
 
-    leading.set('splitPercentage', percentage);
-    trailing.set('splitPercentage', 100 - percentage);
+    // Set the split percentages based on the direction of mouse movement.
+    if ((vertical && event.pageX < splitLine) || (!vertical && event.pageY < splitLine)) {
+      leading.set('splitPercentage', percentage);
+      trailing.set('splitPercentage', 100 - leading.get('splitPercentage'));
+    }
+    else {
+      trailing.set('splitPercentage', 100 - percentage);
+      leading.set('splitPercentage', 100 - trailing.get('splitPercentage'));
+    }
   },
 
   _$blockSelectionInIE: function () {
@@ -61,11 +68,23 @@ export default Ember.Component.extend({
 
   actions: {
     dragSplitter: function () {
-      var $element;
+      var $element,
+        $splitter,
+        line;
 
       if (this._leading === undefined || this._leading === null || this._trailing === undefined || this._trailing === null) {
         return;
       }
+
+      // Determine the current split line of the container. This is used to determine the direction of mouse movement.
+      $splitter = this.$('.happy-splitter');
+      if (this.get('isVertical')) {
+        line = ($splitter.width() / 2) + $splitter.offset().left;
+      }
+      else {
+        line = ($splitter.height() / 2) + $splitter.offset().top;
+      }
+      this.set('_splitLine', line);
 
       $element = this.$();
       this.set('_dragStarted', true);
