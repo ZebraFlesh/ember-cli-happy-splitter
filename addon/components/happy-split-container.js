@@ -31,6 +31,11 @@ export default Ember.Component.extend({
     var $element = this.$();
     $element.off('mousemove', this._$onMouseMove);
     $element.off('selectstart', this._$blockSelectionInIE);
+    Ember.$(window).off('mouseup', this._$onWindowMouseUp);
+  },
+
+  _$onWindowMouseUp: function (event) {
+    event.data.mouseUp();
   },
 
   _$onMouseMove: function (event) {
@@ -88,6 +93,7 @@ export default Ember.Component.extend({
 
       $element = this.$();
       this.set('_dragStarted', true);
+      Ember.$(window).on('mouseup', this, this._$onWindowMouseUp);
       $element.on('selectstart', this._$blockSelectionInIE);
       $element.on('mousemove', this, this._$onMouseMove);
     },
