@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Ember-cli-happy-splitter by ZebraFlesh</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Ember-cli-happy-splitter</h1>
+        <h2>Ember componet for split panel that works without CSP violations</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/ZebraFlesh/ember-cli-happy-splitter/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/ZebraFlesh/ember-cli-happy-splitter/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/ZebraFlesh/ember-cli-happy-splitter" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <p><a href="https://travis-ci.org/ZebraFlesh/ember-cli-happy-splitter"><img src="https://travis-ci.org/ZebraFlesh/ember-cli-happy-splitter.svg?branch=master" alt="Build Status"></a></p>
+
+<h1>
+<a id="ember-cli-happy-splitter" class="anchor" href="#ember-cli-happy-splitter" aria-hidden="true"><span class="octicon octicon-link"></span></a>ember-cli-happy-splitter</h1>
+
+<p>Ember component that implements a split panel (AKA split view, split container).  It tries to have very little opinion 
+ about the container and the nested views.</p>
+
+<p>Why is it happy?  Because there are no content security policy violations! ☺</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Via Ember CLI:</p>
+
+<p><code>ember install ember-cli-happy-splitter</code></p>
+
+<h2>
+<a id="available-options" class="anchor" href="#available-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Available Options</h2>
+
+<ul>
+<li>
+<code>isVertical</code> - boolean flag to create vertical (true) or horizontal (false) split views; set on the <code>happy-split-container</code>
+</li>
+<li>
+<code>splitterWidth</code> - the width of the splitter in pixels; set on the <code>happy-split-container</code>
+</li>
+<li>
+<code>splitPercentage</code> - the percentage of each <code>happy-split-view</code>; you are responsible for ensuring they total 100</li>
+<li>
+<code>minimumPercentage</code> - the minimum <code>splitPercentage</code> of each <code>happy-split-view</code>; defaults to 10%</li>
+</ul>
+
+<h3>
+<a id="css-rules" class="anchor" href="#css-rules" aria-hidden="true"><span class="octicon octicon-link"></span></a>CSS rules</h3>
+
+<p>Override the following CSS rules to customize the appearance of this component:</p>
+
+<ul>
+<li>
+<code>.happy-split-container</code> - the container that holders the views and splitter bars; 100% width and height by default</li>
+<li>
+<code>.happy-split-view</code> - the views within the split container; no default rule provided</li>
+<li>
+<code>.happy-splitter</code> - the splitter bar when the user is not interacting with it</li>
+<li>
+<code>.happy-splitter:hover</code> - the splitter bar when the user is hovering over it; no default rule provided</li>
+<li>
+<code>.happy-splitter.dragging</code> - the splitter bar when the user is dragging it</li>
+<li>
+<code>.happy-splitter.vertical, .happy-split-container.vertical.dragging</code> - change the cursor definition here for vertically split containers</li>
+<li>
+<code>.happy-splitter.horizontal, .happy-split-container.horizontal.dragging</code> - change the cursor definition here for horizontally split containers</li>
+<li>
+<code>.happy-splitter-thumb</code> - the thumb within the splitter bar; no styling by default, refer to 
+<a href="https://github.com/ZebraFlesh/ember-cli-happy-splitter/tree/master/tests/dummy/app/styles/splitter-thumb.scss">splitter-thumb.scss</a> for an example </li>
+</ul>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>This is a simple vertical splitter configuration. Note the use of the handlebars whitespace control character ('~') on 
+both sides of the happy-splitter-bar. The happy-split-container uses a simple inline-block layout. When using a 
+vertical splitter, browsers will interpret the line breaks as meaningful syntax. The whitespace control character 
+removes these line breaks. This is only required for vertical splitters.</p>
+
+<div class="highlight highlight-htmlbars"><pre><span class="pl-c1">{{#happy-split-container}}</span>
+  <span class="pl-c1">{{#happy-split-view}}</span>
+    &lt;<span class="pl-ent">h2</span>&gt;hello from left panel!&lt;/<span class="pl-ent">h2</span>&gt;
+  <span class="pl-c1">{{/happy-split-view}}</span>
+  <span class="pl-c1">{{~</span> <span class="pl-v">happy-splitter-bar</span> <span class="pl-c1">~}}</span>
+  <span class="pl-c1">{{#happy-split-view}}</span>
+    &lt;<span class="pl-ent">h2</span>&gt;hello from right panel!&lt;/<span class="pl-ent">h2</span>&gt;
+  <span class="pl-c1">{{/happy-split-view}}</span>
+<span class="pl-c1">{{/happy-split-container}}</span></pre></div>
+
+<h3>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h3>
+
+<h4>
+<a id="vertical-splitter" class="anchor" href="#vertical-splitter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Vertical Splitter</h4>
+
+<div class="highlight highlight-htmlbars"><pre><span class="pl-c1">{{#happy-split-container</span> <span class="pl-v">isVertical</span>=true<span class="pl-c1">}}</span>
+  <span class="pl-c1">{{#happy-split-view}}</span>
+    &lt;<span class="pl-ent">h2</span>&gt;hello from left panel!&lt;/<span class="pl-ent">h2</span>&gt;
+  <span class="pl-c1">{{/happy-split-view}}</span>
+  <span class="pl-c1">{{~</span> <span class="pl-v">happy-splitter-bar</span> <span class="pl-c1">~}}</span>
+  <span class="pl-c1">{{#happy-split-view}}</span>
+    &lt;<span class="pl-ent">h2</span>&gt;hello from right panel!&lt;/<span class="pl-ent">h2</span>&gt;
+  <span class="pl-c1">{{/happy-split-view}}</span>
+<span class="pl-c1">{{/happy-split-container}}</span></pre></div>
+
+<p>The isVertical variable defaults to true and is optional in this scenario.</p>
+
+<h4>
+<a id="horizontal-splitter" class="anchor" href="#horizontal-splitter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Horizontal Splitter</h4>
+
+<div class="highlight highlight-htmlbars"><pre><span class="pl-c1">{{#happy-split-container</span> <span class="pl-v">isVertical</span>=false<span class="pl-c1">}}</span>
+  <span class="pl-c1">{{#happy-split-view}}</span>
+    &lt;<span class="pl-ent">h2</span>&gt;hello from top panel!&lt;/<span class="pl-ent">h2</span>&gt;
+  <span class="pl-c1">{{/happy-split-view}}</span>
+  <span class="pl-c1">{{</span><span class="pl-v">happy-splitter-bar</span><span class="pl-c1">}}</span>
+  <span class="pl-c1">{{#happy-split-view}}</span>
+    &lt;<span class="pl-ent">h2</span>&gt;hello from bottom panel!&lt;/<span class="pl-ent">h2</span>&gt;
+  <span class="pl-c1">{{/happy-split-view}}</span>
+<span class="pl-c1">{{/happy-split-container}}</span></pre></div>
+
+<h4>
+<a id="customizing-splitter-width" class="anchor" href="#customizing-splitter-width" aria-hidden="true"><span class="octicon octicon-link"></span></a>Customizing Splitter Width</h4>
+
+<div class="highlight highlight-htmlbars"><pre><span class="pl-c1">{{#happy-split-container</span> <span class="pl-v">isVertical</span>=true splitterWidth=10<span class="pl-c1">}}</span>
+  <span class="pl-c1">{{#happy-split-view}}</span>
+    &lt;<span class="pl-ent">h2</span>&gt;hello from left panel!&lt;/<span class="pl-ent">h2</span>&gt;
+  <span class="pl-c1">{{/happy-split-view}}</span>
+  <span class="pl-c1">{{~</span> <span class="pl-v">happy-splitter-bar</span> <span class="pl-c1">~}}</span>
+  <span class="pl-c1">{{#happy-split-view}}</span>
+    &lt;<span class="pl-ent">h2</span>&gt;hello from right panel!&lt;/<span class="pl-ent">h2</span>&gt;
+  <span class="pl-c1">{{/happy-split-view}}</span>
+<span class="pl-c1">{{/happy-split-container}}</span></pre></div>
+
+<p>This will create a splitter 10px wide.</p>
+
+<h4>
+<a id="customizing-split-amounts" class="anchor" href="#customizing-split-amounts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Customizing Split Amounts</h4>
+
+<div class="highlight highlight-htmlbars"><pre><span class="pl-c1">{{#happy-split-container</span> <span class="pl-v">isVertical</span>=true<span class="pl-c1">}}</span>
+  <span class="pl-c1">{{#happy-split-view</span> <span class="pl-v">splitPercentage</span>=25<span class="pl-c1">}}</span>
+    &lt;<span class="pl-ent">h2</span>&gt;hello from left panel!&lt;/<span class="pl-ent">h2</span>&gt;
+  <span class="pl-c1">{{/happy-split-view}}</span>
+  <span class="pl-c1">{{~</span> <span class="pl-v">happy-splitter-bar</span> <span class="pl-c1">~}}</span>
+  <span class="pl-c1">{{#happy-split-view}}</span>
+    &lt;<span class="pl-ent">h2</span>&gt;hello from right panel!&lt;/<span class="pl-ent">h2</span>&gt;
+  <span class="pl-c1">{{/happy-split-view}}</span>
+<span class="pl-c1">{{/happy-split-container}}</span></pre></div>
+
+<p>Annotate each panel with the desired split percentage. Percentages need to add up to 100.</p>
+
+<h2>
+<a id="to-do" class="anchor" href="#to-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>To Do</h2>
+
+<ul>
+<li>Add some tests</li>
+<li>Add more example templates to the dummy app</li>
+<li>Handle nested panels</li>
+<li>Handle more than 2 panels in a container</li>
+<li>Add widget handles to splitter</li>
+<li>Validate split percentages add up to 100</li>
+<li>Validate minimumPercentage &gt;= 0</li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>MIT license</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
