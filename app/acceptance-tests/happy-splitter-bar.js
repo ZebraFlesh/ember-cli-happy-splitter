@@ -1,0 +1,1 @@
+export { default } from 'ember-cli-happy-splitter/acceptance-tests/happy-splitter-bar';

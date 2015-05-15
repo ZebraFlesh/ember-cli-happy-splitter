@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   splitterWidth: Ember.computed.readOnly('parentView.splitterWidth'),
 
   setupSplitterBar: Ember.on('didInsertElement', function () {
+    this.set('target', this.get('parentView'));
     this.updateDimensions();
   }),
 
@@ -26,8 +27,8 @@ export default Ember.Component.extend({
   }),
 
   mouseDown: function (event) {
-    if (event.button === 0 && !event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey) {
-      this.get('parentView').send('dragSplitter');
+    if (!event.button && !event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey) {
+      this.send('dragSplitter');
     }
   }
 });
