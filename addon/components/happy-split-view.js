@@ -9,20 +9,16 @@ export default Ember.Component.extend({
   classNameBindings: ['isVertical:vertical:horizontal'],
   classNames: ['happy-split-view'],
 
-  splitPercentage: Ember.computed(function (key, value/*, oldValue*/) {
-
-    if (value === undefined) {
-      value = 50;
+  _percentage: undefined,
+  splitPercentage: Ember.computed('minimumPercentage', {
+    get: function () {
+      return this._percentage === undefined ? 50 : this._percentage;
+    },
+    set: function (key, value) {
+      this._percentage = Math.max(this.get('minimumPercentage'), value);
+      return this._percentage;
     }
-
-    // getter
-    if (arguments.length === 1) {
-      return value;
-    } // setter
-    else {
-      return Math.max(this.get('minimumPercentage'), value);
-    }
-  }).property('minimumPercentage'),
+  }),
 
   setupSplitView: Ember.on('didInsertElement', function () {
     this.updateDimensions();
