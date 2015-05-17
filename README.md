@@ -119,11 +119,8 @@ Annotate each panel with the desired split percentage. Percentages need to add u
 
 ## To Do
 
-* Add some tests
 * Add more example templates to the dummy app
-* Handle nested panels
 * Handle more than 2 panels in a container
-* Add widget handles to splitter
 * Validate split percentages add up to 100
 * Validate minimumPercentage >= 0
 
