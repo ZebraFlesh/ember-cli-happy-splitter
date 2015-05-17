@@ -87,20 +87,17 @@ test('changing to horizontal sets height', function (assert) {
 
 test('mousedown sends message', function (assert) {
   // Creates the component instance
-  var component = this.subject();
+  var component = this.subject({
+    parentView: Ember.Object.extend({
+      send: function (actionName) {
+          assert.equal('dragSplitter', actionName);
+      }
+    }).create()
+  });
 
   // Renders the component to the page
   this.render();
 
-  Ember.run(() => {
-    var target = {
-      send: function (actionName) {
-        assert.equal('dragSplitter', actionName);
-      }
-    };
-
-    component.set('target', target);
-
-    component.$().mousedown();
-  });
+  // Send a mousedown event
+  component.$().mousedown();
 });

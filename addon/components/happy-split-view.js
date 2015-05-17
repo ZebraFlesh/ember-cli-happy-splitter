@@ -34,7 +34,7 @@ export default Ember.Component.extend({
       // split the width of the splitter between the left/right or top/bottom views
       splitterWidth = this.get('splitterWidth') / 2,
       style = this.element.style,
-      dimension = `calc( ${percentage}% - ${splitterWidth}px)`;
+      dimension = `calc(${percentage}% - ${splitterWidth}px)`;
 
     if (this.get('isVertical')) {
       style.width = dimension;
