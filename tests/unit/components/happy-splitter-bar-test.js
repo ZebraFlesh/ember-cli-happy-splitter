@@ -19,10 +19,10 @@ test('it renders', function (assert) {
   assert.equal(component._state, 'inDOM');
 });
 
-test('splitter observes parent isResizing property', function (assert) {
+test('splitter observes parent isDragging property', function (assert) {
   // Creates the component instance
   var component = this.subject({
-    parentView: Ember.Object.create({isResizing: false})
+    parentView: Ember.Object.create({isDragging: false})
   });
 
   // Renders the component to the page
@@ -30,7 +30,7 @@ test('splitter observes parent isResizing property', function (assert) {
   assert.equal(component.get('isDragging'), false);
 
   Ember.run(() => {
-    component.parentView.set('isResizing', true);
+    component.parentView.set('isDragging', true);
     assert.equal(component.get('isDragging'), true);
   });
 });

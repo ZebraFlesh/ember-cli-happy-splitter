@@ -1,59 +1,45 @@
 import Ember from 'ember';
+import jQuery from 'jquery';  // necessary for jshint to pass
 
 export default Ember.Component.extend({
-  isResizing: false,
+  isDragging: false,
   isVertical: true,
   splitterWidth: 6,
 
-  _dragStarted: false,
   _splitLine: undefined,
   _leading: undefined,
   _trailing: undefined,
 
   classNames: ['happy-split-container'],
-  classNameBindings: ['isVertical:vertical:horizontal', 'isResizing:dragging', '_dragStarted:disable-select'],
+  classNameBindings: ['isVertical:vertical:horizontal', 'isResizing:dragging', 'isDragging:disable-select'],
 
   teardownSplitContainer: Ember.on('willDestroyElement', function () {
-    if (this.get('_dragStarted')) {
-      this._removeEventHandlers();
-    }
+    this.set('isDragging', false);
+    //this.updateEventHandlers();
   }),
 
-  mouseUp: function () {
-    if (this.get('_dragStarted')) {
-      this._removeEventHandlers();
-      this.set('isResizing', false);
-      this.set('_dragStarted', false);
+  mouseUp () {
+    this.set('isDragging', false);
+  },
+
+  mouseMove (event) {
+    var vertical, splitLine, leading, trailing, percentage;
+
+    if (!this.get('isDragging')) {
+      return;
     }
-  },
 
-  _removeEventHandlers: function () {
-    var $element = this.$();
-    $element.off('mousemove', this._$onMouseMove);
-    $element.off('selectstart', this._$blockSelectionInIE);
-    Ember.$(window).off('mouseup', this._$onWindowMouseUp);
-  },
-
-  _$onWindowMouseUp: function (event) {
-    event.data.mouseUp();
-  },
-
-  _$onMouseMove: function (event) {
-    var instance = event.data,
-      vertical = instance.get('isVertical'),
-      splitLine = instance.get('_splitLine'),
-      leading = instance.get('_leading'),
-      trailing = instance.get('_trailing'),
-      percentage;
-
-    instance.set('isResizing', true);
+    vertical = this.get('isVertical');
+    splitLine = this._splitLine;
+    leading = this._leading;
+    trailing = this._trailing;
 
     // Compute the new percentage of the leading view.
     if (vertical) {
-      percentage = (event.pageX - leading.$().offset().left) / instance.$().width() * 100;
+      percentage = (event.pageX - leading.$().offset().left) / this.$().width() * 100;
     }
     else {
-      percentage = (event.pageY - leading.$().offset().top) / instance.$().height() * 100;
+      percentage = (event.pageY - leading.$().offset().top) / this.$().height() * 100;
     }
 
     // Set the split percentages based on the direction of mouse movement.
@@ -67,35 +53,51 @@ export default Ember.Component.extend({
     }
   },
 
-  _$blockSelectionInIE: function () {
+  updateEventHandlers: Ember.observer('isDragging', function () {
+    var $element = this.$(),
+      $window = Ember.$(window);
+
+    if (this.get('isDragging')) {
+      $element.on('selectstart', this._$blockSelectionInIE9);
+      $window.on('mouseup', this, this._$onWindowMouseUp);
+    }
+    else {
+      $element.off('selectstart', this._$blockSelectionInIE9);
+      $window.off('mouseup', this._$onWindowMouseUp);
+    }
+  }),
+
+  // If you drag the mouse outside of the ember application's root element and then release it, you
+  // don't get an event that the mouseup event happened. So we add a handler to the window object
+  // that will invoke the mouseUp event where it's needed.
+  _$onWindowMouseUp: function (event) {
+    event.data.mouseUp();
+  },
+
+  // IE9 seems to like to select text when you drag the splitter.  Returning false from this
+  // custom IE event
+  _$blockSelectionInIE9: function () {
     return false;
   },
 
   actions: {
-    dragSplitter: function () {
-      var $element,
-        $splitter,
-        line;
+    dragSplitter: function ($splitter) {
+      var line;
 
-      if (this._leading === undefined || this._leading === null || this._trailing === undefined || this._trailing === null) {
+      if (Ember.isNone(this._leading) || Ember.isNone(this._trailing) || !($splitter instanceof jQuery)) {
         return;
       }
 
       // Determine the current split line of the container. This is used to determine the direction of mouse movement.
-      $splitter = this.$('.happy-splitter');
       if (this.get('isVertical')) {
         line = ($splitter.width() / 2) + $splitter.offset().left;
       }
       else {
         line = ($splitter.height() / 2) + $splitter.offset().top;
       }
-      this.set('_splitLine', line);
+      this._splitLine = line;
 
-      $element = this.$();
-      this.set('_dragStarted', true);
-      Ember.$(window).on('mouseup', this, this._$onWindowMouseUp);
-      $element.on('selectstart', this._$blockSelectionInIE);
-      $element.on('mousemove', this, this._$onMouseMove);
+      this.set('isDragging', true);
     },
 
     addView: function (view) {

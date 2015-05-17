@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   classNameBindings: ['isVertical:vertical:horizontal', 'isDragging:dragging'],
   classNames: ['happy-splitter'],
 
-  isDragging: Ember.computed.readOnly('parentView.isResizing'),
+  isDragging: Ember.computed.readOnly('parentView.isDragging'),
   isVertical: Ember.computed.readOnly('parentView.isVertical'),
   splitterWidth: Ember.computed.readOnly('parentView.splitterWidth'),
 
@@ -25,9 +25,9 @@ export default Ember.Component.extend({
     }
   }),
 
-  mouseDown: function (event) {
+  mouseDown (event) {
     if (!event.button && !event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey) {
-      this.get('parentView').send('dragSplitter');
+      this.get('parentView').send('dragSplitter', this.$());
     }
   }
 });
