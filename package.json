@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-happy-splitter",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Ember componet for split panel that works without CSP violations",
   "directories": {
     "doc": "doc",
