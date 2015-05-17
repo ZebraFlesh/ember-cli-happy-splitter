@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/ZebraFlesh/ember-cli-happy-splitter.svg?branch=master)](https://travis-ci.org/ZebraFlesh/ember-cli-happy-splitter)
-[![npm version](https://badge.fury.io/js/ember-cli-happy-splitter.svg)](http://badge.fury.io/js/ember-cli-happy-splitter)
+[![npm version](https://img.shields.io/npm/v/ember-cli-happy-splitter.svg)
 
 # ember-cli-happy-splitter
 
