@@ -1,1 +1,0 @@
-export { default } from 'ember-cli-happy-splitter/component-tests/happy-split-container';
