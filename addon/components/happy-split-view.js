@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   isVertical: Ember.computed.readOnly('parentView.isVertical'),
   splitterWidth: Ember.computed.readOnly('parentView.splitterWidth'),
+  siblingsVisible: Ember.computed.and('parentView.leadingVisible', 'parentView.trailingVisible'),
 
   minimumPercentage: 10,
 
@@ -20,21 +21,28 @@ export default Ember.Component.extend({
     }
   }),
 
+  initSplitView: Ember.on('init', function(){
+    this.get('parentView').send('addView', this, this.get('isVisible'));
+  }),
+
   setupSplitView: Ember.on('didInsertElement', function () {
     this.updateDimensions();
-    this.get('parentView').send('addView', this);
   }),
 
   teardownSplitView: Ember.on('willDestroyElement', function () {
     this.get('parentView').send('removeView', this);
   }),
 
-  updateDimensions: Ember.observer('splitPercentage', 'splitterWidth', 'isVertical', function () {
+  updateSplitVisible: Ember.observer('isVisible', function(){
+    this.get('parentView').send(this.get('isVisible') ? 'showView' : 'hideView', this);
+  }),
+
+  updateDimensions: Ember.observer('splitPercentage', 'splitterWidth', 'isVertical','siblingsVisible', function () {
     var percentage = this.get('splitPercentage'),
       // split the width of the splitter between the left/right or top/bottom views
       splitterWidth = this.get('splitterWidth') / 2,
       style = this.element.style,
-      dimension = `calc(${percentage}% - ${splitterWidth}px)`;
+      dimension = this.get('siblingsVisible') ? `calc(${percentage}% - ${splitterWidth}px)` : 'calc(100%)';
 
     if (this.get('isVertical')) {
       style.width = dimension;
