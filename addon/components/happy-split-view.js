@@ -1,8 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  isVertical: Ember.computed.readOnly('parentView.isVertical'),
-  splitterWidth: Ember.computed.readOnly('parentView.splitterWidth'),
+  splitContainer: null,
+  isVertical: Ember.computed.readOnly('splitContainer.isVertical'),
+  splitterWidth: Ember.computed.readOnly('splitContainer.splitterWidth'),
 
   minimumPercentage: 10,
 
@@ -22,11 +23,11 @@ export default Ember.Component.extend({
 
   setupSplitView: Ember.on('didInsertElement', function () {
     this.updateDimensions();
-    this.get('parentView').send('addView', this);
+    this.get('splitContainer').send('addView', this);
   }),
 
   teardownSplitView: Ember.on('willDestroyElement', function () {
-    this.get('parentView').send('removeView', this);
+    this.get('splitContainer').send('removeView', this);
   }),
 
   updateDimensions: Ember.observer('splitPercentage', 'splitterWidth', 'isVertical', function () {

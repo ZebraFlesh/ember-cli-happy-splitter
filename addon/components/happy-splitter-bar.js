@@ -1,12 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  splitContainer: null,
   classNameBindings: ['isVertical:vertical:horizontal', 'isDragging:dragging'],
   classNames: ['happy-splitter'],
 
-  isDragging: Ember.computed.readOnly('parentView.isDragging'),
-  isVertical: Ember.computed.readOnly('parentView.isVertical'),
-  splitterWidth: Ember.computed.readOnly('parentView.splitterWidth'),
+  isDragging: Ember.computed.readOnly('splitContainer.isDragging'),
+  isVertical: Ember.computed.readOnly('splitContainer.isVertical'),
+  splitterWidth: Ember.computed.readOnly('splitContainer.splitterWidth'),
 
   setupSplitterBar: Ember.on('didInsertElement', function () {
     this.updateDimensions();
@@ -27,7 +28,7 @@ export default Ember.Component.extend({
 
   mouseDown (event) {
     if (!event.button && !event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey) {
-      this.get('parentView').send('dragSplitter', this.$());
+      this.get('splitContainer').send('dragSplitter', this.$());
     }
   }
 });
