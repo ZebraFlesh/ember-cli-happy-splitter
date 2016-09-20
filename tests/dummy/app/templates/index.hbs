@@ -1,9 +1,11 @@
-{{#happy-split-container isVertical=true}}
-  {{#happy-split-view class="bgBlue verticalScroll"}}
+{{#happy-split-container isVertical=true as |sContainer|}}
+  {{#happy-split-view class="bgBlue verticalScroll" splitContainer=sContainer }}
+    <button {{action 'toggle' 'visible'}}>Toggle Right</button>
     {{lorem-ipsum length=5500}}
   {{/happy-split-view}}
-  {{~ happy-splitter-bar ~}}
-  {{#happy-split-view class="bgRed verticalScroll"}}
+  {{~ happy-splitter-bar isVisible=visible splitContainer=sContainer ~}}
+  {{#happy-split-view isVisible=visible class="bgRed verticalScroll" splitContainer=sContainer}}
     {{lorem-ipsum length=5500}}
   {{/happy-split-view}}
 {{/happy-split-container}}
+

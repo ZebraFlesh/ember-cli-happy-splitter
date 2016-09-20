@@ -5,13 +5,15 @@ export default Ember.Component.extend({
   isDragging: false,
   isVertical: true,
   splitterWidth: 6,
+  leadingVisible: true,
+  trailingVisible: true,
 
   _splitLine: undefined,
   _leading: undefined,
   _trailing: undefined,
 
   classNames: ['happy-split-container'],
-  classNameBindings: ['isVertical:vertical:horizontal', 'isResizing:dragging', 'isDragging:disable-select'],
+  classNameBindings: ['isVertical:vertical:horizontal', 'isResizing:dragging', 'isDragging:disable-select', 'leadingVisible::lead-hidden', 'trailingVisible::trail-hidden'],
 
   teardownSplitContainer: Ember.on('willDestroyElement', function () {
     this.set('isDragging', false);
@@ -100,16 +102,18 @@ export default Ember.Component.extend({
       this.set('isDragging', true);
     },
 
-    addView: function (view) {
+    addView: function (view, visible) {
       if (view === undefined || view === null) {
         return;
       }
 
       if (this._leading === undefined) {
         this._leading = view;
+        this.set('leadingVisible', visible);
       }
       else if (this._trailing === undefined) {
         this._trailing = view;
+        this.set('trailingVisible', visible);
       }
     },
 
@@ -119,6 +123,24 @@ export default Ember.Component.extend({
       }
       else if (this._trailing === view) {
         this._trailing = undefined;
+      }
+    },
+
+    hideView: function(view){
+      if (this._leading === view){
+        this.set('leadingVisible', false);
+      }
+      else if (this._trailing === view){
+        this.set('trailingVisible', false);
+      }
+    },
+
+    showView: function(view){
+      if (this._leading === view){
+        this.set('leadingVisible', true);
+      }
+      else if (this._trailing === view){
+        this.set('trailingVisible', true);
       }
     }
   }
